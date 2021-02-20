@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace Lab1_4
 {
     class Worker
-    {
+    {   
         public string Name { get; set; }
         public int ID { get; set; }
 
@@ -23,7 +23,7 @@ namespace Lab1_4
                 Console.WriteLine("Данные сохранены в файл");
             }
             
-            using (FileStream fs = new FileStream("person.json", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream("person.json", FileMode.Open))
             {
                 Worker restoredPerson = await JsonSerializer.DeserializeAsync<Worker>(fs);
                 Console.WriteLine($"Name: {restoredPerson.Name}  Age: {restoredPerson.ID}");
