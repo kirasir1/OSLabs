@@ -31,5 +31,4 @@ namespace Lab1_4
 
         }
     }
-
 }
