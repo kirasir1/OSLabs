@@ -33,18 +33,15 @@ class Program
                 Console.WriteLine();
                 xDoc.Load("users.xml");
                 XmlElement xRoot = xDoc.DocumentElement;
-                // обход всех узлов в корневом элементе
                 foreach (XmlNode xnode in xRoot)
                 {
-                    // получаем атрибут name
                     if (xnode.Attributes.Count > 0)
                     {
                         XmlNode attr = xnode.Attributes.GetNamedItem("name");
                         if (attr != null)
                             Console.WriteLine($"Имя: {attr.Value}");
                     }
-
-                    // обходим все дочерние узлы элемента user
+                    
                     foreach (XmlNode childnode in xnode.ChildNodes)
                     {
                         if (childnode.Name == "company")
