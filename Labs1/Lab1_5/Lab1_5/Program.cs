@@ -30,6 +30,7 @@ class Program
         switch (Console.ReadLine())
         {
             case "y":
+                Console.WriteLine();
                 xDoc.Load("users.xml");
                 XmlElement xRoot = xDoc.DocumentElement;
                 // обход всех узлов в корневом элементе
@@ -57,13 +58,47 @@ class Program
                         }
                     }
                 }
-                    Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("Удалить созданный xml файл? y/n");
+                switch (Console.ReadLine())
+                {
+                    case "y":
+                        FileInfo xmlfilecheck = new FileInfo("users.xml");
+                        if (xmlfilecheck.Exists)
+                        {
+                            xmlfilecheck.Delete();
+                        }
+                        break;
+                    case "n":
+                        break;
+                    default:
+                        Console.WriteLine("Вы не выбрали значение");
+                        break;
+                }
+                Console.WriteLine();
                     break;
                     
             case "n":
+                Console.WriteLine("Удалить созданный xml файл? y/n");
+                switch (Console.ReadLine())
+                {
+                    case "y":
+                        FileInfo xmlfilecheck = new FileInfo("users.xml");
+                        if (xmlfilecheck.Exists)
+                        {
+                            xmlfilecheck.Delete();
+                        }
+                        break;
+                    case "n":
+                        break;
+                    default:
+                        Console.WriteLine("Вы не выбрали значение");
+                        break;
+                }
                     break;
                     
             default:
+                Console.WriteLine("Вы не выбрали значение");
                     break;
                 }
         
