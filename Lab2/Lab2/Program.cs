@@ -20,8 +20,6 @@ namespace Lab2
       var text = Encoding.ASCII.GetString(asciibytes);
       Console.WriteLine(text);
       string hash = GetHash(sha256Hash, text);
-      while (hash!=line[0]|| hash != line[1] || hash != line[2])
-      {
         for (int i=0; i<25; i++)
         {
           for (int j = 0; j < 25; j++)
@@ -36,6 +34,7 @@ namespace Lab2
                   text = Encoding.ASCII.GetString(asciibytes);
                   Console.WriteLine(text);
                   hash = GetHash(sha256Hash, text);
+                if (hash == line[0] || hash == line[1] || hash == line[2]) return;
                 }
                 if (asciibytes[4] == 122)
                 {
@@ -45,7 +44,8 @@ namespace Lab2
                 text = Encoding.ASCII.GetString(asciibytes);
                 Console.WriteLine(text);
                 hash = GetHash(sha256Hash, text);
-              }
+              if (hash == line[0] || hash == line[1] || hash == line[2]) return;
+            }
               if (asciibytes[3] == 122)
               {
                 asciibytes[3] = 97;
@@ -54,7 +54,8 @@ namespace Lab2
               text = Encoding.ASCII.GetString(asciibytes);
               Console.WriteLine(text);
               hash = GetHash(sha256Hash, text);
-            }
+            if (hash == line[0] || hash == line[1] || hash == line[2]) return;
+          }
             if (asciibytes[2] == 122)
             {
               asciibytes[2] = 97;
@@ -63,7 +64,8 @@ namespace Lab2
             text = Encoding.ASCII.GetString(asciibytes);
             Console.WriteLine(text);
             hash = GetHash(sha256Hash, text);
-          }
+          if (hash == line[0] || hash == line[1] || hash == line[2]) return;
+        }
           if (asciibytes[1] == 122)
           {
             asciibytes[1] = 97;
@@ -72,8 +74,7 @@ namespace Lab2
           text = Encoding.ASCII.GetString(asciibytes);
           Console.WriteLine(text);
           hash = GetHash(sha256Hash, text);
-        }
-
+        if (hash == line[0] || hash == line[1] || hash == line[2]) return;
       }
     }
     private static string GetHash(HashAlgorithm hashAlgorithm, string input)
