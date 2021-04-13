@@ -7,8 +7,6 @@ namespace Lab3
     class Program
     {
         public static List<int> shelf = new List<int>() { };
-        protected static int origRow = Console.CursorTop;
-        protected static int origCol = Console.CursorLeft;
         static void Main(string[] args)
         {
             /*while (true)
@@ -20,20 +18,40 @@ namespace Lab3
                 }
             }*/
             Thread newproducer = new Thread(new ThreadStart(Producer));
+            Thread newproducera = new Thread(new ThreadStart(Producer));
+            Thread newproducerb = new Thread(new ThreadStart(Producer));
             Thread newcustomer = new Thread(new ThreadStart(Customer));
+            Thread newcustomera = new Thread(new ThreadStart(Customer));
             newproducer.Start();
+            newproducera.Start();
+            newproducerb.Start();
             newcustomer.Start();
+            newcustomera.Start();
+            if (Console.ReadKey(true).Key == ConsoleKey.Q)
+            {
+                newproducer.Abort();
+            }
         }
         private static void Producer()
         {
             while (true)
             {
-                Random newitem = new Random();
-                int a = newitem.Next(10, 100);
-                shelf.Add(a);
-                Console.WriteLine("Added "+a);
-                Console.SetCursorPosition(origCol, origRow);
-                Thread.Sleep(newitem.Next(300, 1500));
+                if (shelf.Count < 100)
+                {
+                    Random newitem = new Random();
+                    int a = newitem.Next(10, 100);
+                    shelf.Add(a);
+                    Console.WriteLine("Added "+a);
+                    Thread.Sleep(newitem.Next(300, 1500));
+                }
+                else if (shelf.Count>=100)
+                {
+                    while (shelf.Count > 80)
+                    {
+                        Random newitem = new Random();
+                        Thread.Sleep(newitem.Next(300, 1500));
+                    }
+                }
             }
         }
         private static void Customer()
@@ -46,7 +64,6 @@ namespace Lab3
                 {
                     shelf.RemoveAt(b); 
                     Console.WriteLine("Removed "+b);
-                    Console.SetCursorPosition(origCol, origRow+1);
                 }
                 Thread.Sleep(pickitem.Next(200, 2000));
             }
